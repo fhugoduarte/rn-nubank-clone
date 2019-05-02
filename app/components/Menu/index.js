@@ -1,19 +1,27 @@
 import React from 'react';
-import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Animated } from 'react-native';
 import QRCode from 'react-native-qrcode';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './styles';
 
-export default function menu() {
+function menu({ translateY }) {
   return (
-    <ScrollView
+    <Animated.ScrollView
       contentContainerStyle={styles.containerContent}
-      style={styles.container}
+      style={[
+        {
+          opacity: translateY.interpolate({
+            inputRange: [0, 150],
+            outputRange: [0, 1],
+          }),
+        },
+        styles.container,
+      ]}
     >
       <View style={styles.code}>
         <QRCode
-          value="https://github.com/fhugoduarte"
+          value="https://www.linkedin.com/in/hugo-duarte-3392bb153/"
           size={80}
           bgColor="#8B10AE"
           fgColor="#FFF"
@@ -40,6 +48,8 @@ export default function menu() {
       <TouchableOpacity style={styles.signOutButton}>
         <Text style={styles.signOutButtonText}>SAIR DO APP </Text>
       </TouchableOpacity>
-    </ScrollView>
+    </Animated.ScrollView>
   );
 }
+
+export default menu;

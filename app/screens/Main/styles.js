@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     position: 'absolute',
     right: 0,
-    top: 380,
+    top: 0,
   },
   cardContent: {
     flex: 1,

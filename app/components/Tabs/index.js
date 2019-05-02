@@ -1,13 +1,33 @@
 import React from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, Animated } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './styles';
 
-function tabs() {
+function tabs({ translateY }) {
   return (
-    <View style={styles.container}>
+    <Animated.View
+      style={[
+        {
+          transform: [
+            {
+              translateY: translateY.interpolate({
+                inputRange: [0, 380],
+                outputRange: [0, 30],
+                extrapolate: 'clamp',
+              }),
+            },
+          ],
+          opacity: translateY.interpolate({
+            inputRange: [0, 380],
+            outputRange: [1, 0.3],
+            extrapolate: 'clamp',
+          }),
+        },
+        styles.container,
+      ]}
+    >
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -35,7 +55,7 @@ function tabs() {
           <Text style={styles.tabText}>Bloquear Cartão</Text>
         </View>
       </ScrollView>
-    </View>
+    </Animated.View>
   );
 }
 
